@@ -28,7 +28,7 @@ for obj in $obj_path; do
             break
         fi
         end_time=$(date +%s.%N)
-        duration=$(echo "$end_time - $start_time" | bc -l | xargs printf "%.2f")
+        duration=$(echo "$end_time - $start_time" | bc -l | xargs printf "%.4f")
         if (( $(echo "$duration < $min_duration" | bc -l) )); then
             min_duration=$duration
         fi
@@ -42,7 +42,7 @@ for obj in $obj_path; do
         total_duration=$(echo "$total_duration + $duration" | bc -l)
     done
     if [[ $error_obj -eq 0 ]];then
-        average_duration=$(echo "$total_duration / $iterations" | bc -l | xargs printf "%.2f")
+        average_duration=$(echo "$total_duration / $iterations" | bc -l | xargs printf "%.4f")
         echo "[$obj_name] MIN: $min_duration s, MAX: $max_duration s, AVG: $average_duration s"
         echo "[$obj_name] below 10 seconds: ${below_10_seconds}/${iterations}"
     fi
